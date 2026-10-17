@@ -1,28 +1,29 @@
-This is a Kotlin Multiplatform project targeting Desktop (JVM).
+# Webdude Music Player
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Webdude Music Player is a Kotlin/Compose Desktop application targeting the JVM.
 
-### Running the apps
+## Current implementation
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
+- First-launch music-folder selection and saved-folder restoration.
+- Recursive MP3 discovery, with symbolic links skipped to keep scans inside the selected folder.
+- Local ID3 metadata reading with filename and unknown-value fallbacks.
+- Search across title, artist, and album; tracks are initially sorted by title.
+- Scan progress, rescan, folder replacement, and basic unavailable-folder/error feedback.
 
-- Desktop app:
-  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
-  - Standard run: `./gradlew :desktopApp:run`
+This initial slice does **not** yet play audio or edit tags/lyrics. It does not modify music files.
 
-### Running tests
+## Run
 
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
+On Windows:
 
-- Desktop tests: `./gradlew :shared:jvmTest`
+```powershell
+.\gradlew.bat :desktopApp:run
+```
 
----
+On macOS/Linux:
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+```shell
+./gradlew :desktopApp:run
+```
+
+Run desktop tests with `:desktopApp:test` using the wrapper for your operating system.
